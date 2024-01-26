@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="694.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.ClientFormController">
+   <children>
+      <ImageView fitHeight="694.0" fitWidth="782.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="694.0" fitWidth="782.0">
+         <image>
+            <Image url="@../assets/background.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txtMessage" layoutX="14.0" layoutY="622.0" onAction="#txtMessageOnAction" prefHeight="51.0" prefWidth="594.0" promptText="Message" style="-fx-background-radius: 18;">
+         <font>
+            <Font name="System Bold Italic" size="13.0" />
+         </font>
+      </TextField>
+      <ScrollPane fx:id="scrollpane" layoutX="20.0" layoutY="70.0" prefHeight="520.0" prefWidth="743.0">
+         <content>
+            <VBox fx:id="vBox" prefHeight="520.0" prefWidth="746.0" />
+         </content>
+      </ScrollPane>
+      <Label fx:id="lblClientName" layoutX="310.0" layoutY="21.0" prefHeight="39.0" prefWidth="189.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="59.0" fitWidth="69.0" layoutX="19.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="iconCat" fitHeight="51.0" fitWidth="62.0" layoutX="14.0" layoutY="15.0">
+         <image>
+            <Image url="@../icon/chat.png" />
+         </image>
+      </ImageView>
+      <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="541.0" layoutY="628.0" onAction="#btnCameraIconOnAction" prefHeight="39.0" prefWidth="62.0" ripplerFill="#445159">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fx:id="iconCamera" fitHeight="30.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icon/camera.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="684.0" layoutY="627.0" onAction="#btnSendOnAction" prefHeight="39.0" prefWidth="69.0" ripplerFill="#5d3587" style="-fx-background-radius: 20px;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="36.0">
+               <image>
+                  <Image url="@../icon/sendmessage.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="633.0" layoutY="624.0" onAction="#btnImojiOnAction" prefHeight="47.0" prefWidth="46.0" ripplerFill="#5d3587" style="-fx-background-radius: 20px;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="33.0">
+               <image>
+                  <Image url="@../icon/imoji.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+   </children>
+</AnchorPane>
