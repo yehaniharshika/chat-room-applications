@@ -45,7 +45,7 @@ public class HomeScreenFormController {
 
     public void initialize() throws IOException {
 
-        serverSocket = new ServerSocket(1800);
+        serverSocket = new ServerSocket(1900);
         System.out.println("call initialize");
         new Thread(new Runnable() {
             @Override

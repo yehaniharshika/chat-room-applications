@@ -46,6 +46,21 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Label>
+            <ImageView fx:id="iconCat" fitHeight="47.0" fitWidth="62.0" layoutX="34.0" layoutY="13.0">
+               <image>
+                  <Image url="@../icon/chat.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="14.0" layoutY="28.0" prefHeight="65.0" prefWidth="40.0" text="C" textFill="#0c0c0c">
+               <font>
+                  <Font name="Noto Serif Sinhala Bold" size="43.0" />
+               </font>
+            </Label>
+            <Label layoutX="44.0" layoutY="52.0" prefHeight="33.0" prefWidth="128.0" text="hatWise" textFill="#0c0c0c">
+               <font>
+                  <Font name="Noto Serif Sinhala Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

@@ -75,7 +75,7 @@ public class ClientFormController {
         lblClientName.setText(name+ "'s chat");
 
         try{
-            socket = new Socket("localhost",1800);
+            socket = new Socket("localhost",1900);
             System.out.println("client connected");
 
             dataInputStream = new DataInputStream(socket.getInputStream());
@@ -377,6 +377,7 @@ public class ClientFormController {
         txtMessage.appendText("\uD83D\uDC4D");
         emojiPane.setVisible(false);
     }
+
 }
 
 

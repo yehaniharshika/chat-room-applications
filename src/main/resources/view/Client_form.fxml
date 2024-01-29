@@ -79,7 +79,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <AnchorPane fx:id="emojiPane" layoutX="516.0" layoutY="449.0" prefHeight="158.0" prefWidth="247.0" styleClass="emoji_pane" visible="false">
+      <AnchorPane fx:id="emojiPane" layoutX="505.0" layoutY="489.0" prefHeight="118.0" prefWidth="258.0" styleClass="emoji_pane" visible="false">
          <children>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#grinningFaceEmojiOnAction" pickOnBounds="true">
                <image>
@@ -131,11 +131,6 @@
                   <Image url="@../emoji/thumbsup.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="24.0" layoutY="74.0" onMouseClicked="#cryingFaceOnAction" pickOnBounds="true">
-               <image>
-                  <Image url="@../emoji/smilingfacewithtear.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
       <Label layoutX="44.0" layoutY="50.0" prefHeight="33.0" prefWidth="128.0" text="hatWise" textFill="#0c0c0c">
@@ -143,7 +138,7 @@
             <Font name="Noto Serif Sinhala Bold" size="14.0" />
          </font>
       </Label>
-      <ImageView fitHeight="67.0" fitWidth="69.0" layoutX="694.0" layoutY="7.0">
+      <ImageView fitHeight="73.0" fitWidth="75.0" layoutX="694.0" layoutY="7.0">
          <image>
             <Image url="@../icon/man.png" />
          </image>
