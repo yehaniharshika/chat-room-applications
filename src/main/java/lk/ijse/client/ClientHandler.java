@@ -6,24 +6,27 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClientHandler {
     private Socket socket;
-    private List<ClientHandler> clientsList;
+    private static List<ClientHandler> clientsList = new ArrayList<>();
     public static HomeScreenFormController homeScreenFormController;
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
     private String message = "";
     public  String clientName;
+    public  String sender;
 
-    public ClientHandler(Socket socket,List<ClientHandler> clientsList){
+    public ClientHandler(Socket socket){
 
         try {
             this.socket = socket;
-            this.clientsList = clientsList;
             this.dataInputStream = new DataInputStream(socket.getInputStream());
             this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            clientName = dataInputStream.readUTF();
+            clientsList.add(this);
             System.out.println("Server: "+ clientName +" has enter the live chat");
         } catch (IOException e) {
             e.printStackTrace();
@@ -34,118 +37,73 @@ public class ClientHandler {
             public void run() {
 
                 while (socket.isConnected()) {
-                        try{
-                            String messageFromClient = dataInputStream.readUTF();
-                            System.out.println(messageFromClient);
-                            if (messageFromClient.equals("*image*")){
-                                receiveImage();
-                            }else{
-                                for (ClientHandler clientHandler : clientsList) {
-                                    if (!clientHandler.clientName.equals(clientName)) {
-                                        clientHandler.broadcastMessage(clientName,messageFromClient);
-                                    }
-                                }
-                            }
+                    try{
+                        String messageFromClient = dataInputStream.readUTF();
+                        System.out.println(messageFromClient);
 
-                        }catch (IOException e){
-                           clientsList.remove(this);
-                           System.out.println("server"+clientName+ "has left the chat");
-                           break;
+                        String[] message = messageFromClient.split(" : ");
+                        sender = message[0];
+
+                        if (messageFromClient.startsWith("image is message")){
+                            System.out.println("image is message");
+                            String[] imgSender = messageFromClient.split("-");
+                            sender = imgSender[1];
+                            handleImageMessage(messageFromClient);
+                            //receiveImage();
+                        }else{
+                            //broadcast to each user
+                            broadcastMessage(messageFromClient);
                         }
 
+                    }catch (IOException e){
+                        clientsList.remove(this);
+                        System.out.println("server "+clientName + " has left the chat");
+                        break;
+                    }
                 }
-
 
             }
         }).start();
-
     }
 
-    private void broadcastMessage(String sender , String messageFroClient) throws IOException {
-        dataOutputStream.writeUTF(sender + ": "+messageFroClient);
-        dataOutputStream.flush();
-    }
-
-    private void receiveImage() throws IOException {
-        int size = dataInputStream.readInt();
-        byte[] bytes = new byte[size];
-        dataInputStream.read(bytes);
-
-        for (ClientHandler clientHandler : clientsList){
-            if (clientHandler.clientName.equals(clientName)){
-                clientHandler.sendImage(clientName,bytes);
-            }
+    private void handleImageMessage(String imgMessage) {
+        try {
+            int imageDataLength = dataInputStream.readInt();
+            byte[] imageData = new byte[imageDataLength];
+            dataInputStream.readFully(imageData);
+            //broadcast the image to other clients
+            broadcastImage(imageData,imgMessage);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
-    public void sendImage(String clientName, byte[] bytes) throws IOException {
-        dataOutputStream.writeUTF("*image*");
-        dataOutputStream.writeUTF(clientName);
-        dataOutputStream.writeInt(bytes.length);
-        dataOutputStream.write(bytes);
-        dataOutputStream.flush();
-    }
-
-
-
-
-
-
-
-
-   /* @Override
-    public void run() {
-
-        while (socket.isConnected()){
-            try {
-                message= dataInputStream.readUTF();
-
-                if (message.equals("*image*")){
-                    receivedImage();
-                }else {
-                    for (ClientHandler clientHandler : clientsList){
-                        if (clientHandler.socket.getPort() == socket.getPort()){
-                            if (clientHandler.clientName.equals(clientName)){
-                                clientHandler.sendingMessage(clientName,message);
-
-                            }
-                        }else{
-                            System.out.println("not equal port");
-                        }
-
-                    }
+    private void broadcastImage(byte[] imageData, String imgMessage) {
+        String clientName = imgMessage.split("-")[1];
+        for (ClientHandler clientHandler : clientsList){
+            if (!clientHandler.clientName.equals(sender)){
+                try {
+                    clientHandler.dataOutputStream.writeUTF("image is message"+"-"+clientName);
+                    clientHandler.dataOutputStream.flush();
+                    clientHandler.dataOutputStream.writeInt(imageData.length);
+                    clientHandler.dataOutputStream.flush();
+                    clientHandler.dataOutputStream.write(imageData);
+                    clientHandler.dataOutputStream.flush();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-            } catch (IOException e) {
-                clientsList.remove(this);
-                break;
-            }
-        }
-    }*/
-
-   /* private void receivedImage() throws IOException {
-        int size = dataInputStream.readInt();
-        byte[] bytes = new byte[size];
-        dataInputStream.read(bytes);
-
-        for (ClientHandler clientHandler : clientsList){
-            if (clientHandler.clientName.equals(clientName)){
-                clientHandler.sendingImage(clientName,bytes);
             }
         }
     }
 
-    private void sendingImage(String clientName, byte[] bytes) throws IOException {
-        dataOutputStream.writeUTF("*image*");
-        dataOutputStream.writeUTF(clientName);
-        dataOutputStream.writeInt(bytes.length);
-        dataOutputStream.write(bytes);
-        dataOutputStream.flush();
+    private void broadcastMessage(String messageFroClient) throws IOException {
+        for (ClientHandler clientHandler : clientsList) {
+            if (!clientHandler.clientName.equals(sender)) {
+                clientHandler.dataOutputStream.writeUTF(messageFroClient);
+                clientHandler.dataOutputStream.flush();
+            }
+        }
     }
-
-    private void sendingMessage(String clientName, String message) throws IOException {
-        dataOutputStream.writeUTF(clientName + ": "+message);
-        dataOutputStream.flush();
-    }*/
-
 }
 

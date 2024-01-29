@@ -79,5 +79,59 @@
             </ImageView>
          </graphic>
       </JFXButton>
+      <AnchorPane fx:id="emojiPane" layoutX="516.0" layoutY="464.0" prefHeight="125.0" prefWidth="247.0" styleClass="emoji_pane" visible="false">
+         <children>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#grinningFaceEmojiOnAction" pickOnBounds="true">
+               <image>
+                  <Image url="@../emoji/grinning_face.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="53.0" layoutY="14.0" onMouseClicked="#grinningSquintingOnAction" pickOnBounds="true">
+               <image>
+                  <Image url="@../emoji/grinning_squinting_face.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="92.0" layoutY="14.0" onMouseClicked="#smilingFaceWithOpenHandsOnAction" pickOnBounds="true">
+               <image>
+                  <Image url="@../emoji/smilingfacewithopenhands.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="132.0" layoutY="14.0" onMouseClicked="#grinningFaceWithSweatOnAction" pickOnBounds="true">
+               <image>
+                  <Image url="@../emoji/grinning_facewithsweat.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="173.0" layoutY="14.0" onMouseClicked="#faceWithTearsOfJoyOnAction" pickOnBounds="true">
+               <image>
+                  <Image url="@../emoji/facewithtears_of_joy.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="64.0" onMouseClicked="#cryingFaceOnAction" pickOnBounds="true">
+               <image>
+                  <Image url="@../emoji/smilingfacewithtear.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="53.0" layoutY="64.0" onMouseClicked="#sunglassesFaceOnAction" pickOnBounds="true">
+               <image>
+                  <Image url="@../emoji/smilingfacewithsunglasses.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="93.0" layoutY="64.0" onMouseClicked="#smilingFaceWithHeartEyesOnAction" pickOnBounds="true">
+               <image>
+                  <Image url="@../emoji/smilingfacewithheart-eyes.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="134.0" layoutY="64.0" onMouseClicked="#smilingFaceWithHornsOnAction" pickOnBounds="true">
+               <image>
+                  <Image url="@../emoji/smilingfacewithhorns.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="177.0" layoutY="64.0" onMouseClicked="#thumbsUpOnAction" pickOnBounds="true">
+               <image>
+                  <Image url="@../emoji/thumbsup.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

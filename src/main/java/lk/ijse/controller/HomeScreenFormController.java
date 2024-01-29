@@ -35,6 +35,8 @@ public class HomeScreenFormController {
     public  static String clientName;
     public static ArrayList<ClientHandler> clientsList;
     private ServerSocket serverSocket;
+    public static String username;
+    public ClientHandler clientHandler;
 
 
     public HomeScreenFormController() {
@@ -45,16 +47,18 @@ public class HomeScreenFormController {
 
 //        startServer();
 
-        serverSocket = new ServerSocket(1400);
+        serverSocket = new ServerSocket(1800);
         System.out.println("call initialize");
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Socket socket = serverSocket.accept();
-                    ClientHandler clientHandler = new ClientHandler(socket,clientsList);
-                    clientsList.add(clientHandler);
-                    System.out.println("client socket accepted");
+                    while (!serverSocket.isClosed()) {
+                        Socket socket = serverSocket.accept();
+                        System.out.println("client socket accepted");
+                        clientHandler = new ClientHandler(socket);
+                    }
+
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -63,49 +67,42 @@ public class HomeScreenFormController {
         }).start();
     }
 
-    /*public void makeSocket(){
-        while (!serverSocket.isClosed()){
-            try {
-                Socket socket = serverSocket.accept();
-                ClientHandler clientHandler = new ClientHandler(socket,clientsList);
-                clientsList.add(clientHandler);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
 
     @FXML
     void btnLoginOnAction(ActionEvent event) {
 
-        String username = textUserName.getText();
+        username = textUserName.getText();
         textUserName.clear();
 
         Stage primaryStage = new Stage();
+        if (username.isEmpty()){
+            new Alert(Alert.AlertType.INFORMATION,"please enter your username !!!").show();
+        }else {
+            try {
+                primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/Client_form.fxml"))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            primaryStage.setTitle(textUserName.getText()+"join the chat");
+            primaryStage.centerOnScreen();
+            primaryStage.show();
+            primaryStage.setOnCloseRequest(Event ->{
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("confirmation");
+                alert.setContentText("Are you sure you want to exit the chatroom?");
 
-        try {
-            primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/Client_form.fxml"))));
-        } catch (IOException e) {
-            e.printStackTrace();
+                ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
+                if (result == ButtonType.OK){
+                    primaryStage.close();
+                }
+                else {
+                    event.consume();
+                }
+            });
         }
-        primaryStage.setTitle(textUserName.getText()+"join the chat");
-        primaryStage.centerOnScreen();
-        primaryStage.show();
-        primaryStage.setOnCloseRequest(Event ->{
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("confirmation");
-            alert.setContentText("Are you sure you want to exit the chatroom?");
 
-            ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
-            if (result == ButtonType.OK){
-                primaryStage.close();
-            }
-            else {
-                event.consume();
-            }
-        });
 
     }
+
 
 }
