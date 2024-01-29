@@ -1,4 +1,4 @@
-<h1 align="center">Hi 👋, I'm Yehani Harshika</h1>
+<h1 align="center">Hi 👋, I'm Yehani Harshika Pamunuwa</h1>
 <h3 align="center">Chat Application project</h3>
 
 <h3 align="left">Connect with me:</h3>
