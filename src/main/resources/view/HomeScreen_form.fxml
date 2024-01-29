@@ -1,41 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="700.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.HomeScreenFormController">
+<AnchorPane fx:id="root" prefHeight="661.0" prefWidth="855.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.HomeScreenFormController">
    <children>
-      <AnchorPane layoutX="20.0" layoutY="17.0" prefHeight="666.0" prefWidth="881.0" style="-fx-background-radius: 15;">
+      <AnchorPane layoutX="20.0" layoutY="17.0" prefHeight="627.0" prefWidth="815.0" style="-fx-background-radius: 15;">
          <children>
-            <ImageView fitHeight="666.0" fitWidth="881.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="666.0" fitWidth="881.0">
+            <ImageView fitHeight="627.0" fitWidth="815.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="627.0" fitWidth="815.0">
                <image>
                   <Image url="@../assets/background.jpg" />
                </image>
             </ImageView>
-            <TextField fx:id="textUserName" layoutX="96.0" layoutY="420.0" prefHeight="51.0" prefWidth="483.0" promptText="User name">
+            <TextField fx:id="textUserName" layoutX="84.0" layoutY="395.0" prefHeight="51.0" prefWidth="495.0" promptText="User name">
                <font>
-                  <Font name="System Bold Italic" size="13.0" />
+                  <Font name="System Bold Italic" size="15.0" />
                </font>
             </TextField>
-            <JFXButton fx:id="btnLogin" layoutX="633.0" layoutY="420.0" onAction="#btnLoginOnAction" prefHeight="51.0" prefWidth="145.0" style="-fx-background-color: black;" text="LOGIN" textFill="WHITE">
+            <JFXButton fx:id="btnLogin" layoutX="608.0" layoutY="395.0" onAction="#btnLoginOnAction" prefHeight="51.0" prefWidth="145.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-radius: 25;" text="LOGIN" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
-            <AnchorPane layoutX="337.0" layoutY="109.0" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane layoutX="331.0" layoutY="109.0" prefHeight="202.0" prefWidth="206.0">
                <children>
-                  <ImageView fx:id="imgUser" fitHeight="200.0" fitWidth="200.0" layoutX="7.0">
+                  <ImageView fx:id="imgUser" fitHeight="200.0" fitWidth="206.0" layoutX="-20.0" layoutY="2.0">
                      <image>
                         <Image url="@../icon/user.png" />
                      </image>
                   </ImageView>
                </children>
             </AnchorPane>
+            <Label fx:id="lblClientName" layoutX="157.0" layoutY="559.0" prefHeight="39.0" prefWidth="507.0" style="-fx-background-color: #3ebcc2;" text=" Created by,,, Yehani Harshika Pamunuwa" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

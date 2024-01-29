@@ -81,7 +81,7 @@ public class HomeScreenFormController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            primaryStage.setTitle(textUserName.getText()+"join the chat");
+            primaryStage.setTitle(username);
             primaryStage.centerOnScreen();
             primaryStage.show();
             primaryStage.setOnCloseRequest(Event ->{
