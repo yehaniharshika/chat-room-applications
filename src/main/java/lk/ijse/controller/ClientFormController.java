@@ -57,17 +57,13 @@ public class ClientFormController {
     @FXML
     public TextField txtMessage;
     public ClientHandler clientHandler;
-    
 
     @FXML
     public VBox vBox;
-   // private Client client;
     private Socket socket;
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
     private String name;
-
-
 
     @Setter
     HomeScreenFormController homeScreenFormController;
@@ -111,15 +107,8 @@ public class ClientFormController {
                 while (socket.isConnected()){
 
                     try {
-
                         String receivingMsg = dataInputStream.readUTF();
                         receivedMessage(receivingMsg,ClientFormController.this.vBox);
-                        /*if (receivingMsg.endsWith("png")||receivingMsg.endsWith("jpg")||receivingMsg.endsWith("gif")){
-                            receivedMessage(receivingMsg,ClientFormController.this.vBox);
-                        }*/
-                       /* else{
-                            receivedMessage(receivingMsg,ClientFormController.this.vBox);
-                        }*/
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -128,7 +117,7 @@ public class ClientFormController {
         }).start();
     }
 
-    //handle receive message
+    //handle receive message as image or as text message
     private void receivedMessage(String receivingMsg, VBox vBox) {
         System.out.println(receivingMsg);
         if (receivingMsg.startsWith("image is message")){
@@ -136,60 +125,6 @@ public class ClientFormController {
         }else{
             receiveTypeMessage(receivingMsg,vBox);
         }
-       /* //".*\\.(png|jpe?g|gif)$"
-        if (receivingMsg.endsWith("png")||receivingMsg.endsWith("jpg")||receivingMsg.endsWith("gif")) {
-            HBox hBoxName = new HBox();
-            hBoxName.setAlignment(Pos.CENTER_LEFT);
-            Text textName = new Text(receivingMsg.split("[-]")[0]);
-            TextFlow textFlowName = new TextFlow(textName);
-            hBoxName.getChildren().add(textFlowName);
-
-            Image image = new Image(receivingMsg.split("[-]")[1]);
-            ImageView imageView = new ImageView(image);
-            imageView.setFitHeight(200);
-            imageView.setFitWidth(200);
-            HBox hBox = new HBox();
-            hBox.setAlignment(Pos.CENTER_LEFT);
-            hBox.setPadding(new Insets(5, 5, 5, 10));
-            hBox.getChildren().add(imageView);
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    vBox.getChildren().add(hBoxName);
-                    vBox.getChildren().add(hBox);
-                }
-            });
-        }else{
-//            String name = receivingMsg.split(" : ")[0];
-//            String msgFromServer = receivingMsg.split(" : ")[1];
-
-            HBox hBox = new HBox();
-            hBox.setAlignment(Pos.CENTER_LEFT);
-            hBox.setPadding(new Insets(5,5,5,10));
-
-            HBox hBoxName = new HBox();
-            hBoxName.setAlignment(Pos.CENTER_LEFT);
-            Text textName = new Text(name);
-            TextFlow textFlow1 = new TextFlow(textName);
-            hBoxName.getChildren().add(textFlow1);
-
-            Text text = new Text(receivingMsg);
-            TextFlow textFlow = new TextFlow(text);
-            textFlow.setStyle("-fx-background-color: #abb8c3; -fx-font-weight: bold; -fx-background-radius: 20px");
-            textFlow.setPadding(new Insets(5,10,5,10));
-            text.setFill(Color.color(0,0,0));
-
-            hBox.getChildren().add(textFlow);
-
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    vBox.getChildren().add(hBox);
-
-                }
-            });
-        }*/
-
     }
 
     private void receiveTypeMessage(String receivingMsg, VBox vBox) {
@@ -224,6 +159,7 @@ public class ClientFormController {
     private void receiveImageMessage(String receivingMsg) {
         try {
             String name = receivingMsg.split("-")[1];
+            //The dataInputStream.readInt() method reads the length of the image data.
             int imageDataLength = dataInputStream.readInt();
             byte[] imageData = new byte[imageDataLength];
             dataInputStream.readFully(imageData);
@@ -268,24 +204,6 @@ public class ClientFormController {
             throw new RuntimeException(e);
         }
     }
-
-     /*public void setImage(byte[] bytes , String  sender){
-        HBox hBox = new HBox();
-        Label msgLabel = new Label(sender);
-        msgLabel.setStyle("-fx-background-color:   #B53471;-fx-background-radius:15;-fx-font-size: 18;-fx-font-weight: normal;-fx-text-fill: white;-fx-wrap-text: true;-fx-alignment: center;-fx-content-display: left;-fx-padding: 10;-fx-max-width: 350;");
-        //hBox.setStyle("-fx-fill-height: true; -fx-min-height: 50; -fx-pref-width: 520; -fx-max-width: 520; -fx-padding: 10; " + (sender.equals(client.getClass()) ? "-fx-alignment: center-right;" : "-fx-alignment: center-left;"));
-
-        Platform.runLater(() ->{
-            ImageView imageView = new ImageView(new Image(new ByteArrayInputStream(bytes)));
-            imageView.setStyle("-fx-padding: 10px;");
-            imageView.setFitHeight(200);
-            imageView.setFitWidth(120);
-
-            hBox.getChildren().addAll(msgLabel,imageView);
-            vBox.getChildren().add(hBox);
-        });
-
-    }*/
 
     @FXML
     void btnSendOnAction(ActionEvent event) {
@@ -347,30 +265,6 @@ public class ClientFormController {
         if (selectedFile != null){
             sendImageToServer(selectedFile);
         }
-
-       /*if (selectedFile != null){
-            try{
-                byte[] bytes = Files.readAllBytes(selectedFile.toPath());
-                HBox hBox = new HBox();
-                hBox.setStyle("-fx-fill-height: true; -fx-min-height: 50; -fx-pref-width: 520; -fx-max-width: 520; -fx-padding: 10; -fx-alignment: center-right;");
-
-                // Display the image in an ImageView or any other UI component
-                ImageView imageView = new ImageView(new Image(new FileInputStream(selectedFile)));
-                imageView.setStyle("-fx-padding: 10px;");
-                imageView.setFitHeight(180);
-                imageView.setFitWidth(100);
-
-                hBox.getChildren().addAll(imageView);
-                vBox.getChildren().add(hBox);
-
-                if (clientHandler != null){
-                    receivedMessage(receivingMsg,vBox);
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
     }
 
     private void sendImageToServer(File selectedFile) {
@@ -399,6 +293,7 @@ public class ClientFormController {
 
     private void displayImage(byte[] imageData) {
         Image image = new Image(new ByteArrayInputStream(imageData));
+        //create an ImageView with the Image.
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(200);
         imageView.setFitHeight(200);
@@ -423,29 +318,6 @@ public class ClientFormController {
         return name;
     }
 
-    /*private void sendImage(String msgToSend) {
-        if (msgToSend != null){
-            Image image = new Image(msgToSend);
-            ImageView imageView = new ImageView(image);
-            imageView.setFitHeight(200);
-            imageView.setFitWidth(200);
-//        TextFlow textFlow = new TextFlow(imageView);
-            HBox hBox = new HBox();
-            hBox.setPadding(new Insets(5,5,5,10));
-            hBox.getChildren().add(imageView);
-            hBox.setAlignment(Pos.CENTER_RIGHT);
-
-            vBox.getChildren().add(hBox);
-
-            try {
-                dataOutputStream.writeUTF(name + "-" +msgToSend);
-                dataOutputStream.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }*/
 
     public void btnImojiOnAction(ActionEvent actionEvent) {
         emojiPane.setVisible(!emojiPane.isVisible());
@@ -505,9 +377,6 @@ public class ClientFormController {
         txtMessage.appendText("\uD83D\uDC4D");
         emojiPane.setVisible(false);
     }
-
-
-    
 }
 
 

@@ -20,7 +20,6 @@ public class ClientHandler {
     public  String sender;
 
     public ClientHandler(Socket socket){
-
         try {
             this.socket = socket;
             this.dataInputStream = new DataInputStream(socket.getInputStream());
@@ -48,8 +47,9 @@ public class ClientHandler {
                             System.out.println("image is message");
                             String[] imgSender = messageFromClient.split("-");
                             sender = imgSender[1];
+                            //for handling Image as message
                             handleImageMessage(messageFromClient);
-                            //receiveImage();
+
                         }else{
                             //broadcast to each user
                             broadcastMessage(messageFromClient);
