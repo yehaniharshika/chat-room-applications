@@ -17,7 +17,7 @@ public class Launcher extends Application {
         AnchorPane rootNode = FXMLLoader.load(this.getClass().getResource("/view/HomeScreen_form.fxml"));
         Scene scene=new Scene(rootNode);
         stage.setScene(scene);
-        stage.setTitle("Login Form");
+        stage.setTitle("Chatwise Live chat Application");
         stage.centerOnScreen();
 
         stage.show();
