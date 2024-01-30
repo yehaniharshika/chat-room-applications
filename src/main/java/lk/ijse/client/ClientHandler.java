@@ -56,6 +56,13 @@ public class ClientHandler {
                         }
 
                     }catch (IOException e){
+                        try {
+                            dataInputStream.close();
+                            dataOutputStream.close();
+                            socket.close();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                         clientsList.remove(this);
                         System.out.println("server "+clientName + " has left the chat");
                         break;

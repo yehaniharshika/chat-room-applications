@@ -92,6 +92,7 @@ public class HomeScreenFormController {
                 ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
                 if (result == ButtonType.OK){
                     primaryStage.close();
+                    System.out.println(username+ " left the live chat!!!");
                 }
                 else {
                     event.consume();
