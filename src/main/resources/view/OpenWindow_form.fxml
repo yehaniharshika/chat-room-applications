@@ -2,45 +2,31 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="window" prefHeight="579.0" prefWidth="629.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.OpenWindowFormController">
+<AnchorPane fx:id="window" prefHeight="589.0" prefWidth="460.0" style="-fx-background-color: white; -fx-border-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.OpenWindowFormController">
    <children>
-      <AnchorPane layoutX="17.0" layoutY="18.0" prefHeight="545.0" prefWidth="593.0" style="-fx-background-color: #3ebcc2; -fx-background-radius: 15;">
+      <AnchorPane layoutX="14.0" layoutY="16.0" prefHeight="558.0" prefWidth="433.0" style="-fx-background-color: #3ebcc2;">
          <children>
-            <ImageView fitHeight="200.0" fitWidth="215.0" layoutX="198.0" layoutY="96.0">
-               <image>
-                  <Image url="@../icon/Joinman.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="9.0" layoutY="29.0" prefHeight="65.0" prefWidth="40.0" text="C" textFill="#0c0c0c">
+            <Label layoutX="196.0" layoutY="229.0" prefHeight="33.0" prefWidth="128.0" text="hatWise" textFill="#0c0c0c">
                <font>
-                  <Font name="Noto Serif Sinhala Bold" size="43.0" />
+                  <Font name="Noto Serif Sinhala Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="41.0" layoutY="53.0" prefHeight="33.0" prefWidth="128.0" text="hatWise" textFill="#0c0c0c">
-               <font>
-                  <Font name="Noto Serif Sinhala Bold" size="14.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="iconCat" fitHeight="47.0" fitWidth="62.0" layoutX="29.0" layoutY="14.0">
+            <ProgressIndicator fx:id="loadingBar" layoutX="163.0" layoutY="361.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="101.0" prefWidth="108.0" styleClass="progress" stylesheets="@../../../../../chat_application/src/main/resources/view/style/color.css" />
+            <ImageView fx:id="iconCat1" fitHeight="47.0" fitWidth="62.0" layoutX="190.0" layoutY="182.0">
                <image>
                   <Image url="@../icon/chat.png" />
                </image>
             </ImageView>
-            <Label layoutX="327.0" layoutY="273.0" prefHeight="33.0" prefWidth="128.0" text="NOW" textFill="#0c0c0c">
+            <Label layoutX="163.0" layoutY="206.0" prefHeight="57.0" prefWidth="40.0" text="C" textFill="#0c0c0c">
                <font>
-                  <Font name="Noto Serif Sinhala Bold" size="41.0" />
+                  <Font name="Noto Serif Sinhala Bold" size="45.0" />
                </font>
-               <effect>
-                  <Glow level="0.69" />
-               </effect>
             </Label>
-            <ProgressIndicator fx:id="loadingBar" layoutX="252.0" layoutY="393.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="101.0" prefWidth="108.0" styleClass="progress" stylesheets="@../../../../../chat_application/src/main/resources/view/style/color.css" />
          </children>
       </AnchorPane>
    </children>
