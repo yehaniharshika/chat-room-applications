@@ -327,6 +327,7 @@ public class ClientFormController {
         btnSendOnAction(event);
     }
 
+    //emoji
     public void grinningFaceEmojiOnAction(MouseEvent mouseEvent) {
         txtMessage.appendText("\uD83D\uDE00");
         emojiPane.setVisible(false);
